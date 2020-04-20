@@ -21,6 +21,7 @@ namespace Ascent
         {
             CreateWalls();
             CreateFloors();
+            CreateTownBuildings();
             CreatePlayer();
         }
 
@@ -54,6 +55,7 @@ namespace Ascent
                     GameDataManager.GameMap.Tiles[y * Hud.MapWidth + x] = new FloorTile();
                 }
             }
+            
         }
 
         // Flood the map using the TileWall class
@@ -62,10 +64,57 @@ namespace Ascent
             // Create an empty array of tiles that is equal to the map size
             GameDataManager.GameMap.Tiles = new BaseTile[Hud.MapWidth * Hud.MapHeight];
 
-            //Fill the entire tile array with floors
+            //Fill the entire tile array with walls
             for (int i = 0; i < GameDataManager.GameMap.Tiles.Length; i++)
             {
                 GameDataManager.GameMap.Tiles[i] = new WallTile();
+            }
+        }
+
+        public static void CreateTownBuildings()
+        {
+            //Top Left Building
+            for (int i = 10; i < 15; i++)
+            {
+                for (int j = 4; j < 9; j++)
+                {
+                    GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new WallTile();
+                    if (i == 14 && j == 6)
+                        GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new FloorTile();
+                }
+            }
+
+            //Bottom Left Building
+            for (int i = 10; i < 15; i++)
+            {
+                for (int j = 12; j < 17; j++)
+                {
+                    GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new WallTile();
+                    if (i == 14 && j == 14)
+                        GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new FloorTile();
+                }
+            }
+
+            //Top Right Building
+            for (int i = 45; i < 50; i++)
+            {
+                for (int j = 4; j < 9; j++)
+                {
+                    GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new WallTile();
+                    if (i == 45 && j == 6)
+                        GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new FloorTile();
+                }
+            }
+
+            //Bottom Right Building
+            for (int i = 45; i < 50; i++)
+            {
+                for (int j = 12; j < 17; j++)
+                {
+                    GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new WallTile();
+                    if (i == 45 && j == 14)
+                        GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new FloorTile();
+                }
             }
         }
 
