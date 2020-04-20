@@ -22,7 +22,15 @@ namespace Ascent
             CreateWalls();
             CreateFloors();
             CreateTownBuildings();
+            PlaceStairs();
             CreatePlayer();
+        }
+
+        private static void PlaceStairs()
+        {
+            Stair downstairs = new Stair(Color.Green, Color.Transparent, "Down Stairs", '<');
+            downstairs.Position = SadConsole.Helpers.GetPointFromIndex((GameDataManager.GameMap.Height / 2) * Hud.MapWidth + (GameDataManager.GameMap.Width / 2), Hud.MapWidth);
+            Hud.MapConsole.Children.Add(downstairs);
         }
 
         // Create a player using SadConsole's Entity class
