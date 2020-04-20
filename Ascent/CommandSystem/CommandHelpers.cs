@@ -42,9 +42,9 @@ namespace Ascent
         public static bool MovePlayerBy(Point positionChange)
         {
             // Check the map if we can move to this new position
-            if (MapGenerator.IsTileWalkable(MapGenerator.Player.Position + positionChange, Hud.MapWidth, Hud.MapHeight))
+            if (MapGenerator.IsTileWalkable(GameDataManager.Player.Position + positionChange, Hud.MapWidth, Hud.MapHeight))
             {
-                MapGenerator.Player.Position += positionChange;
+                GameDataManager.Player.Position += positionChange;
                 return true;
             }
             else
@@ -54,7 +54,7 @@ namespace Ascent
         // centers the viewport camera on an Actor
         public static void CenterOnPlayer()
         {
-            Hud.MapScrollConsole.CenterViewPortOnPoint(MapGenerator.Player.Position);
+            Hud.MapScrollConsole.CenterViewPortOnPoint(GameDataManager.Player.Position);
         }
         #endregion
     }
