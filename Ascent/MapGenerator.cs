@@ -28,15 +28,15 @@ namespace Ascent
 
         private static void PlaceStairs()
         {
-            Stair downstairs = new Stair(Color.Green, Color.Transparent, "Down Stairs", '<');
-            downstairs.Position = SadConsole.Helpers.GetPointFromIndex((GameDataManager.GameMap.Height / 2) * Hud.MapWidth + (GameDataManager.GameMap.Width / 2), Hud.MapWidth);
-            Hud.MapConsole.Children.Add(downstairs);
+            Stair Downstairs = new Stair(Color.White, Color.Black, "Down Stairs", false, '<');
+            Downstairs.Position = SadConsole.Helpers.GetPointFromIndex((GameDataManager.GameMap.Height / 2) * Hud.MapWidth + (GameDataManager.GameMap.Width / 2), Hud.MapWidth);
+            Hud.MapConsole.Children.Add(Downstairs);
         }
 
         // Create a player using SadConsole's Entity class
         private static void CreatePlayer()
         {
-            GameDataManager.Player = new Player(Color.Yellow, Color.Transparent);
+            GameDataManager.Player = new Player(Color.Yellow, Color.Transparent);   
             // Place the player on the first non-movement-blocking tile on the map
             for (int i = 0; i < GameDataManager.GameMap.Tiles.Length; i++)
             {
