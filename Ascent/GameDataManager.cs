@@ -14,5 +14,6 @@ namespace Ascent
         public static int HighestLevelAchieved { get; set; }
         public static Player Player { get; set; }
         public static List<Stair> Stairs { get; set; }
+        public static List<Enemy> Enemies { get; set; }
     }
 }

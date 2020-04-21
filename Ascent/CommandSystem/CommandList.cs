@@ -13,13 +13,16 @@ namespace Ascent
         {
             if (MapGenerator.IsTileWalkable(actor.Position + new Point(0, -1), Hud.MapWidth, Hud.MapHeight))
             {
-                //Monster monster = MapGenerator.GameMap.GetEntityAt<Monster>(actor.Position + new Point(0, -1));
-                //Item item = MapGenerator.GameMap.GetEntityAt<Item>(actor.Position + new Point(0, -1));
-                //if (monster != null)
-                //{
-                //    CommandManager.attack_command.Execute(actor, monster);
-                //    return;
-                //}
+                if (GameDataManager.Enemies != null)
+                {
+                    Enemy enemy = GameDataManager.GameMap.GetEnemyAt(actor.Position + new Point(0, -1));
+                    //Item item = MapGenerator.GameMap.GetEntityAt<Item>(actor.Position + new Point(1, 0));
+                    if (enemy != null)
+                    {
+                        CommandManager.attack_command.Execute(actor, enemy);
+                        return;
+                    }
+                }
                 //// if there's an item here,
                 //// try to pick it up
                 //else if (item != null)
@@ -41,13 +44,16 @@ namespace Ascent
         {
             if (MapGenerator.IsTileWalkable(actor.Position + new Point(0, 1), Hud.MapWidth, Hud.MapHeight))
             {
-                //Monster monster = MapGenerator.GameMap.GetEntityAt<Monster>(actor.Position + new Point(0, 1));
-                //Item item = MapGenerator.GameMap.GetEntityAt<Item>(actor.Position + new Point(0, 1));
-                //if (monster != null)
-                //{
-                //    CommandManager.attack_command.Execute(actor, monster);
-                //    return;
-                //}
+                if (GameDataManager.Enemies != null)
+                {
+                    Enemy enemy = GameDataManager.GameMap.GetEnemyAt(actor.Position + new Point(0, 1));
+                    //Item item = MapGenerator.GameMap.GetEntityAt<Item>(actor.Position + new Point(1, 0));
+                    if (enemy != null)
+                    {
+                        CommandManager.attack_command.Execute(actor, enemy);
+                        return;
+                    }
+                }
                 //// if there's an item here,
                 //// try to pick it up
                 //else if (item != null)
@@ -69,13 +75,16 @@ namespace Ascent
         {
             if (MapGenerator.IsTileWalkable(actor.Position + new Point(-1, 0), Hud.MapWidth, Hud.MapHeight))
             {
-                //Monster monster = MapGenerator.GameMap.GetEntityAt<Monster>(actor.Position + new Point(-1, 0));
-                //Item item = MapGenerator.GameMap.GetEntityAt<Item>(actor.Position + new Point(-1, 0));
-                //if (monster != null)
-                //{
-                //    CommandManager.attack_command.Execute(actor, monster);
-                //    return;
-                //}
+                if (GameDataManager.Enemies != null)
+                {
+                    Enemy enemy = GameDataManager.GameMap.GetEnemyAt(actor.Position + new Point(-1, 0));
+                    //Item item = MapGenerator.GameMap.GetEntityAt<Item>(actor.Position + new Point(1, 0));
+                    if (enemy != null)
+                    {
+                        CommandManager.attack_command.Execute(actor, enemy);
+                        return;
+                    }
+                }
                 //// if there's an item here,
                 //// try to pick it up
                 //else if (item != null)
@@ -97,14 +106,17 @@ namespace Ascent
         public void Execute(Actor actor)
         {
             if (MapGenerator.IsTileWalkable(actor.Position + new Point(1, 0), Hud.MapWidth, Hud.MapHeight))
-            {                
-                //Monster monster = MapGenerator.GameMap.GetEntityAt<Monster>(actor.Position + new Point(1, 0));
-                //Item item = MapGenerator.GameMap.GetEntityAt<Item>(actor.Position + new Point(1, 0));
-                //if (monster != null)
-                //{
-                //    CommandManager.attack_command.Execute(actor, monster);
-                //    return;
-                //}
+            {
+                if(GameDataManager.Enemies != null)
+                {
+                    Enemy enemy = GameDataManager.GameMap.GetEnemyAt(actor.Position + new Point(1, 0));
+                    //Item item = MapGenerator.GameMap.GetEntityAt<Item>(actor.Position + new Point(1, 0));
+                    if (enemy != null)
+                    {
+                        CommandManager.attack_command.Execute(actor, enemy);
+                        return;
+                    }
+                }
                 //// if there's an item here,
                 //// try to pick it up
                 //else if (item != null)
@@ -153,14 +165,14 @@ namespace Ascent
         }
     }
 
-    //public class AttackCommand : ICommandBinary
-    //{
-    //    public void Execute(Actor attacker, Actor defender)
-    //    {
-    //        var CombatSystem = new Combat();
-    //        CombatSystem.Attack(attacker, defender);            
-    //    }
-    //}
+    public class AttackCommand : ICommandBinary
+    {
+        public void Execute(Actor attacker, Actor defender)
+        {
+            var CombatSystem = new Combat();
+            CombatSystem.Attack(attacker, defender);
+        }
+    }
 
     //public class PickupCommand : ICommandItem
     //{

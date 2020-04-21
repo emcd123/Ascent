@@ -36,5 +36,15 @@ namespace Ascent
             }
             return null;
         }
+
+        public Enemy GetEnemyAt(Point position)
+        {
+            foreach (var enemy in GameDataManager.Enemies)
+            {
+                if (enemy.Position == position)
+                    return enemy;
+            }
+            return null;
+        }
     }
 }

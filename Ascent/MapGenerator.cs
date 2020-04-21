@@ -23,6 +23,7 @@ namespace Ascent
             CreateWalls();
             CreateFloors();
             PlaceStairs(true);
+            CreateEnemies();
             CreatePlayer();
         }
 
@@ -145,6 +146,45 @@ namespace Ascent
                     if (i == 45 && j == 14)
                         GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new FloorTile();
                 }
+            }
+        }
+
+        // Create some random monsters with random attack and defense values
+        // and drop them all over the map in
+        // random places.
+        public static void CreateEnemies()
+        {
+            GameDataManager.Enemies = new List<Enemy>();
+            // number of monsters to create
+            int numMonsters = 2;
+
+            // Create several monsters and 
+            // pick a random position on the map to place them.
+            // check if the placement spot is blocking (e.g. a wall)
+            // and if it is, try a new position
+            for (int i = 0; i < numMonsters; i++)
+            {
+                int enemyPosition = 0;
+                Enemy newEnemy = new Enemy(Color.Blue, Color.Transparent);
+                while (GameDataManager.GameMap.Tiles[enemyPosition].IsBlockingMove)
+                {
+                    // pick a random spot on the map
+                    enemyPosition = GameDataManager.rng.Next(0, Hud.MapWidth * Hud.MapHeight);
+                }
+
+                // plug in some magic numbers for attack and defense values
+                newEnemy.Defense = GameDataManager.rng.Next(0, 10);
+                newEnemy.DefenseChance = GameDataManager.rng.Next(0, 50);
+                newEnemy.Attack = GameDataManager.rng.Next(0, 10);
+                newEnemy.AttackChance = GameDataManager.rng.Next(0, 50);
+                newEnemy.Name = "a common troll";
+
+                // Set the monster's new position
+                // Note: this fancy math will be replaced by a new helper method
+                // in the next revision of SadConsole
+                newEnemy.Position = new Point(enemyPosition % Hud.MapWidth, enemyPosition / Hud.MapWidth);
+                GameDataManager.Enemies.Add(newEnemy);
+                Hud.MapConsole.Children.Add(newEnemy);
             }
         }
 
