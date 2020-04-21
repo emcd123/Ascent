@@ -133,10 +133,16 @@ namespace Ascent
                     // **TEST For now there are only two levels with no level tracker so all upstairs go to town
                     if (!Stairs.DownStair)
                     {
-                        MapGenerator.GenerateTownMap();
+                        --GameDataManager.CurrentGameLevel;
+                        if (GameDataManager.CurrentGameLevel == 0)
+                            MapGenerator.GenerateTownMap();
+                        else
+                            MapGenerator.GenerateSquareMap();
                         MapGenerator.LoadMap();
                         return;
                     }
+                    ++GameDataManager.CurrentGameLevel;
+                    ++GameDataManager.HighestLevelAchieved;
                     MapGenerator.GenerateSquareMap();
                     MapGenerator.LoadMap();
                     return;

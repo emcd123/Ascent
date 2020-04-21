@@ -35,6 +35,7 @@ namespace MyProject
         private static void Init()
         {
             Hud.InitHUD();
+            GameDataManager.CurrentGameLevel = GameDataManager.HighestLevelAchieved = 0;
             MapGenerator.GenerateTownMap();
             MapGenerator.LoadMap();
         }
