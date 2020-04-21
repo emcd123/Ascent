@@ -131,7 +131,7 @@ namespace Ascent
                 if (Stairs != null)
                 {
                     // **TEST For now there are only two levels with no level tracker so all upstairs go to town
-                    if (!Stairs.DownStair)
+                    if (!Stairs.DownStair) 
                     {
                         --GameDataManager.CurrentGameLevel;
                         if (GameDataManager.CurrentGameLevel == 0)

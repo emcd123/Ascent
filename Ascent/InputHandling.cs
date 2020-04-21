@@ -40,7 +40,7 @@ namespace MyProject
             }
 
             // Keyboard movement for Player character: Right arrow
-            if (SadConsole.Global.KeyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.RightShift) && SadConsole.Global.KeyboardState.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.OemPeriod))
+            if ((SadConsole.Global.KeyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.RightShift) || SadConsole.Global.KeyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftShift)) && (SadConsole.Global.KeyboardState.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.OemPeriod) || SadConsole.Global.KeyboardState.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.OemComma)))
             {
                 CommandManager.UseStairs.Execute(actor);
             }
