@@ -16,9 +16,20 @@ namespace Ascent
             Hud.MapScrollConsole = new ScrollingConsole(Hud.MapWidth, Hud.MapHeight, Global.FontDefault, new Rectangle(0, 0, Hud.MapWidth, Hud.MapHeight), GameDataManager.GameMap.Tiles);
             Hud.MapConsole.Children.Add(Hud.MapScrollConsole);
         }
+        public static void GenerateSquareMap()
+        {
+            Hud.MapConsole.Children.Clear();
+            GameDataManager.GameMap = new Map(Hud.MapWidth, Hud.MapHeight);
+            CreateWalls();
+            CreateFloors();
+            PlaceStairs(true);
+            CreatePlayer();
+        }
 
         public static void GenerateTownMap()
         {
+            Hud.MapConsole.Children.Clear();
+            GameDataManager.GameMap = new Map(Hud.MapWidth, Hud.MapHeight);
             CreateWalls();
             CreateFloors();
             CreateTownBuildings();
@@ -26,11 +37,22 @@ namespace Ascent
             CreatePlayer();
         }
 
-        private static void PlaceStairs()
+        private static void PlaceStairs(bool notTown = false)
         {
-            Stair Downstairs = new Stair(Color.White, Color.Black, "Down Stairs", false, '<');
+            GameDataManager.Stairs = new List<Stair>() { };
+            Stair Downstairs = new Stair(Color.White, Color.Black, "Down Stairs", true, '>');
             Downstairs.Position = SadConsole.Helpers.GetPointFromIndex((GameDataManager.GameMap.Height / 2) * Hud.MapWidth + (GameDataManager.GameMap.Width / 2), Hud.MapWidth);
+            GameDataManager.Stairs.Add(Downstairs);
             Hud.MapConsole.Children.Add(Downstairs);
+
+            // **TEST this is just to guarantee an upstairs on the non-town level
+            if (notTown)
+            {
+                Stair UpStairs = new Stair(Color.White, Color.Black, "Up Stairs", false, '<');
+                UpStairs.Position = SadConsole.Helpers.GetPointFromIndex((GameDataManager.GameMap.Height / 2) * Hud.MapWidth + (GameDataManager.GameMap.Width / 2 -1), Hud.MapWidth);
+                GameDataManager.Stairs.Add(UpStairs);
+                Hud.MapConsole.Children.Add(UpStairs);
+            }
         }
 
         // Create a player using SadConsole's Entity class

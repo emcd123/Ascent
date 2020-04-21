@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Ascent.Entities;
+using Microsoft.Xna.Framework;
+using SadConsole.Entities;
 
 namespace Ascent
 {
@@ -22,6 +25,16 @@ namespace Ascent
             Width = width;
             Height = height;
             Tiles = new BaseTile[width * height];
+        }
+
+        public Stair GetStairAt(Point position)
+        {
+            foreach(var stair in GameDataManager.Stairs)
+            {
+                if (stair.Position == position)
+                    return stair;
+            }
+            return null;
         }
     }
 }

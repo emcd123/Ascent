@@ -35,7 +35,6 @@ namespace MyProject
         private static void Init()
         {
             Hud.InitHUD();
-            GameDataManager.GameMap = new Map(Hud.MapWidth, Hud.MapHeight);
             MapGenerator.GenerateTownMap();
             MapGenerator.LoadMap();
         }

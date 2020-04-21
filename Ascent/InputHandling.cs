@@ -1,7 +1,6 @@
 ﻿using System;
 using Ascent;
 using Ascent.Entities;
-using SadConsole.Entities;
 
 namespace MyProject
 {
@@ -38,6 +37,12 @@ namespace MyProject
             if (SadConsole.Global.KeyboardState.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.Right))
             {
                 CommandManager.right_command.Execute(actor);
+            }
+
+            // Keyboard movement for Player character: Right arrow
+            if (SadConsole.Global.KeyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.RightShift) && SadConsole.Global.KeyboardState.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.OemPeriod))
+            {
+                CommandManager.UseStairs.Execute(actor);
             }
         }
     }

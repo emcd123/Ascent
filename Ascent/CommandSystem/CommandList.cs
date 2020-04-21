@@ -121,6 +121,32 @@ namespace Ascent
         }
     }
 
+    public class UseStairsCommand : ICommand
+    {
+        public void Execute(Actor actor)
+        {
+            if (MapGenerator.IsTileWalkable(actor.Position, Hud.MapWidth, Hud.MapHeight))
+            {
+                Stair Stairs = GameDataManager.GameMap.GetStairAt(actor.Position);
+                if (Stairs != null)
+                {
+                    // **TEST For now there are only two levels with no level tracker so all upstairs go to town
+                    if (!Stairs.DownStair)
+                    {
+                        MapGenerator.GenerateTownMap();
+                        MapGenerator.LoadMap();
+                        return;
+                    }
+                    MapGenerator.GenerateSquareMap();
+                    MapGenerator.LoadMap();
+                    return;
+                }
+            }
+            else
+                return;
+        }
+    }
+
     //public class AttackCommand : ICommandBinary
     //{
     //    public void Execute(Actor attacker, Actor defender)
