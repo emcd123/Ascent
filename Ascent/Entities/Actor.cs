@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Ascent.Entities
 {
-    public abstract class Actor : Entity
+    public class Actor : Entity
     {
         private int _health; //current health
         private int _maxHealth; //maximum possible health
@@ -22,7 +22,7 @@ namespace Ascent.Entities
 
         //public List<Item> Inventory = new List<Item>(); // the player's collection of items
 
-        protected Actor(Color foreground, Color background, int glyph) : base(foreground, background, glyph)
+        public Actor(Color foreground, Color background, int glyph) : base(foreground, background, glyph)
         {
             Animation.CurrentFrame[0].Foreground = foreground;
             Animation.CurrentFrame[0].Background = background;

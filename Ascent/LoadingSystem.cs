@@ -23,8 +23,9 @@ namespace MyProject
                 Formatting = Formatting.Indented,
             };
             string JsonSaveData;
-            JsonSaveData = System.Text.Json.JsonSerializer.Serialize(GameLoop.GameDataManager, settings);
+            JsonSaveData = JsonConvert.SerializeObject(GameLoop.GameDataManager.Player);
             File.WriteAllText(FilePath, JsonSaveData);
+            var Player = JsonConvert.DeserializeObject<Player>(JsonSaveData);
         }
 
         public static void LoadGameFromJson()
