@@ -1,4 +1,5 @@
 ﻿using Ascent.Entities;
+using MyProject;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -50,7 +51,7 @@ namespace Ascent
             for (int dice = 0; dice < attacker.Attack; dice++)
             {
                 //Roll a single D100 and add its results to the attack Message
-                int diceOutcome = GameDataManager.rng.Next(1,100);
+                int diceOutcome = GameLoop.GameDataManager.rng.Next(1,100);
 
                 //Resolve the dicing outcome and register a hit, governed by the
                 //attacker's AttackChance value.
@@ -78,7 +79,7 @@ namespace Ascent
                 for (int dice = 0; dice < defender.Defense; dice++)
                 {
                     //Roll a single D100 and add its results to the defense Message
-                    int diceOutcome = GameDataManager.rng.Next(1, 100);
+                    int diceOutcome = GameLoop.GameDataManager.rng.Next(1, 100);
 
                     //Resolve the dicing outcome and register a block, governed by the
                     //attacker's DefenceChance value.
@@ -151,7 +152,7 @@ namespace Ascent
             //}
 
             // actor goes bye-bye
-            GameDataManager.Enemies.Remove((Enemy)defender);
+            GameLoop.GameDataManager.Enemies.Remove((Enemy)defender);
             Hud.MapConsole.Children.Remove((Enemy)defender);
             // Now show the deathMessage in the messagelog
             Hud.MessageLog.Add(deathMessage.ToString());

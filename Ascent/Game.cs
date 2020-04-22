@@ -8,8 +8,10 @@ using Ascent.Entities;
 
 namespace MyProject
 {
-    class Game
+    class GameLoop
     {
+
+        public static GameDataManager GameDataManager = new GameDataManager();
         static void Main(string[] args)
         {
             // Setup the engine and create the main window.

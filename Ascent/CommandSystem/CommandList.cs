@@ -1,6 +1,7 @@
 ﻿using Ascent.Entities;
 using ConsoleLayers;
 using Microsoft.Xna.Framework;
+using MyProject;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,9 +14,9 @@ namespace Ascent
         {
             if (MapGenerator.IsTileWalkable(actor.Position + new Point(0, -1), Hud.MapWidth, Hud.MapHeight))
             {
-                if (GameDataManager.Enemies != null)
+                if (GameLoop.GameDataManager.Enemies != null)
                 {
-                    Enemy enemy = GameDataManager.GameMap.GetEnemyAt(actor.Position + new Point(0, -1));
+                    Enemy enemy = GameLoop.GameDataManager.GameMap.GetEnemyAt(actor.Position + new Point(0, -1));
                     //Item item = MapGenerator.GameMap.GetEntityAt<Item>(actor.Position + new Point(1, 0));
                     if (enemy != null)
                     {
@@ -44,9 +45,9 @@ namespace Ascent
         {
             if (MapGenerator.IsTileWalkable(actor.Position + new Point(0, 1), Hud.MapWidth, Hud.MapHeight))
             {
-                if (GameDataManager.Enemies != null)
+                if (GameLoop.GameDataManager.Enemies != null)
                 {
-                    Enemy enemy = GameDataManager.GameMap.GetEnemyAt(actor.Position + new Point(0, 1));
+                    Enemy enemy = GameLoop.GameDataManager.GameMap.GetEnemyAt(actor.Position + new Point(0, 1));
                     //Item item = MapGenerator.GameMap.GetEntityAt<Item>(actor.Position + new Point(1, 0));
                     if (enemy != null)
                     {
@@ -75,9 +76,9 @@ namespace Ascent
         {
             if (MapGenerator.IsTileWalkable(actor.Position + new Point(-1, 0), Hud.MapWidth, Hud.MapHeight))
             {
-                if (GameDataManager.Enemies != null)
+                if (GameLoop.GameDataManager.Enemies != null)
                 {
-                    Enemy enemy = GameDataManager.GameMap.GetEnemyAt(actor.Position + new Point(-1, 0));
+                    Enemy enemy = GameLoop.GameDataManager.GameMap.GetEnemyAt(actor.Position + new Point(-1, 0));
                     //Item item = MapGenerator.GameMap.GetEntityAt<Item>(actor.Position + new Point(1, 0));
                     if (enemy != null)
                     {
@@ -107,9 +108,9 @@ namespace Ascent
         {
             if (MapGenerator.IsTileWalkable(actor.Position + new Point(1, 0), Hud.MapWidth, Hud.MapHeight))
             {
-                if(GameDataManager.Enemies != null)
+                if(GameLoop.GameDataManager.Enemies != null)
                 {
-                    Enemy enemy = GameDataManager.GameMap.GetEnemyAt(actor.Position + new Point(1, 0));
+                    Enemy enemy = GameLoop.GameDataManager.GameMap.GetEnemyAt(actor.Position + new Point(1, 0));
                     //Item item = MapGenerator.GameMap.GetEntityAt<Item>(actor.Position + new Point(1, 0));
                     if (enemy != null)
                     {
@@ -139,22 +140,22 @@ namespace Ascent
         {
             if (MapGenerator.IsTileWalkable(actor.Position, Hud.MapWidth, Hud.MapHeight))
             {
-                Stair Stairs = GameDataManager.GameMap.GetStairAt(actor.Position);
+                Stair Stairs = GameLoop.GameDataManager.GameMap.GetStairAt(actor.Position);
                 if (Stairs != null)
                 {
                     // **TEST For now there are only two levels with no level tracker so all upstairs go to town
                     if (!Stairs.DownStair) 
                     {
-                        --GameDataManager.CurrentGameLevel;
-                        if (GameDataManager.CurrentGameLevel == 0)
+                        --GameLoop.GameDataManager.CurrentGameLevel;
+                        if (GameLoop.GameDataManager.CurrentGameLevel == 0)
                             MapGenerator.GenerateTownMap();
                         else
                             MapGenerator.GenerateSquareMap();
                         MapGenerator.LoadMap();
                         return;
                     }
-                    ++GameDataManager.CurrentGameLevel;
-                    ++GameDataManager.HighestLevelAchieved;
+                    ++GameLoop.GameDataManager.CurrentGameLevel;
+                    ++GameLoop.GameDataManager.HighestLevelAchieved;
                     MapGenerator.GenerateSquareMap();
                     MapGenerator.LoadMap();
                     return;

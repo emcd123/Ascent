@@ -8,12 +8,12 @@ namespace Ascent
 {
     public class GameDataManager
     {
-        public static Random rng = new Random();
-        public static Map GameMap { get; set; }
-        public static int CurrentGameLevel { get; set; }
-        public static int HighestLevelAchieved { get; set; }
-        public static Player Player { get; set; }
-        public static List<Stair> Stairs { get; set; }
-        public static List<Enemy> Enemies { get; set; }
+        public Random rng = new Random();
+        public Map GameMap { get; set; }
+        public int CurrentGameLevel { get; set; }
+        public int HighestLevelAchieved { get; set; }
+        public Player Player { get; set; }
+        public List<Stair> Stairs { get; set; }
+        public List<Enemy> Enemies { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Ascent.Entities;
 using Microsoft.Xna.Framework;
+using MyProject;
 using SadConsole.Entities;
 
 namespace Ascent
@@ -29,7 +30,7 @@ namespace Ascent
 
         public Stair GetStairAt(Point position)
         {
-            foreach(var stair in GameDataManager.Stairs)
+            foreach(var stair in GameLoop.GameDataManager.Stairs)
             {
                 if (stair.Position == position)
                     return stair;
@@ -39,7 +40,7 @@ namespace Ascent
 
         public Enemy GetEnemyAt(Point position)
         {
-            foreach (var enemy in GameDataManager.Enemies)
+            foreach (var enemy in GameLoop.GameDataManager.Enemies)
             {
                 if (enemy.Position == position)
                     return enemy;

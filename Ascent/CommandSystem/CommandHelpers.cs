@@ -2,6 +2,7 @@
 using Ascent.Entities;
 using ConsoleLayers;
 using Microsoft.Xna.Framework;
+using MyProject;
 using SadConsole;
 
 namespace Ascent
@@ -42,9 +43,9 @@ namespace Ascent
         public static bool MovePlayerBy(Point positionChange)
         {
             // Check the map if we can move to this new position
-            if (MapGenerator.IsTileWalkable(GameDataManager.Player.Position + positionChange, Hud.MapWidth, Hud.MapHeight))
+            if (MapGenerator.IsTileWalkable(GameLoop.GameDataManager.Player.Position + positionChange, Hud.MapWidth, Hud.MapHeight))
             {
-                GameDataManager.Player.Position += positionChange;
+                GameLoop.GameDataManager.Player.Position += positionChange;
                 return true;
             }
             else
@@ -54,7 +55,7 @@ namespace Ascent
         // centers the viewport camera on an Actor
         public static void CenterOnPlayer()
         {
-            Hud.MapScrollConsole.CenterViewPortOnPoint(GameDataManager.Player.Position);
+            Hud.MapScrollConsole.CenterViewPortOnPoint(GameLoop.GameDataManager.Player.Position);
         }
         #endregion
     }

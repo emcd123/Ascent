@@ -1,5 +1,6 @@
 ﻿using Ascent.Entities;
 using Microsoft.Xna.Framework;
+using MyProject;
 using SadConsole;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,13 @@ namespace Ascent
         public static void LoadMap()
         {
             // First load the map's tiles into the console
-            Hud.MapScrollConsole = new ScrollingConsole(Hud.MapWidth, Hud.MapHeight, Global.FontDefault, new Rectangle(0, 0, Hud.MapWidth, Hud.MapHeight), GameDataManager.GameMap.Tiles);
+            Hud.MapScrollConsole = new ScrollingConsole(Hud.MapWidth, Hud.MapHeight, Global.FontDefault, new Rectangle(0, 0, Hud.MapWidth, Hud.MapHeight), GameLoop.GameDataManager.GameMap.Tiles);
             Hud.MapConsole.Children.Add(Hud.MapScrollConsole);
         }
         public static void GenerateSquareMap()
         {
             Hud.MapConsole.Children.Clear();
-            GameDataManager.GameMap = new Map(Hud.MapWidth, Hud.MapHeight);
+            GameLoop.GameDataManager.GameMap = new Map(Hud.MapWidth, Hud.MapHeight);
             CreateWalls();
             CreateFloors();
             PlaceStairs(true);
@@ -30,7 +31,7 @@ namespace Ascent
         public static void GenerateTownMap()
         {
             Hud.MapConsole.Children.Clear();
-            GameDataManager.GameMap = new Map(Hud.MapWidth, Hud.MapHeight);
+            GameLoop.GameDataManager.GameMap = new Map(Hud.MapWidth, Hud.MapHeight);
             CreateWalls();
             CreateFloors();
             CreateTownBuildings();
@@ -40,18 +41,18 @@ namespace Ascent
 
         private static void PlaceStairs(bool notTown = false)
         {
-            GameDataManager.Stairs = new List<Stair>() { };
+            GameLoop.GameDataManager.Stairs = new List<Stair>() { };
             Stair Downstairs = new Stair(Color.White, Color.Black, "Down Stairs", true, '>');
-            Downstairs.Position = SadConsole.Helpers.GetPointFromIndex((GameDataManager.GameMap.Height / 2) * Hud.MapWidth + (GameDataManager.GameMap.Width / 2), Hud.MapWidth);
-            GameDataManager.Stairs.Add(Downstairs);
+            Downstairs.Position = SadConsole.Helpers.GetPointFromIndex((GameLoop.GameDataManager.GameMap.Height / 2) * Hud.MapWidth + (GameLoop.GameDataManager.GameMap.Width / 2), Hud.MapWidth);
+            GameLoop.GameDataManager.Stairs.Add(Downstairs);
             Hud.MapConsole.Children.Add(Downstairs);
 
             // **TEST this is just to guarantee an upstairs on the non-town level
             if (notTown)
             {
                 Stair UpStairs = new Stair(Color.White, Color.Black, "Up Stairs", false, '<');
-                UpStairs.Position = SadConsole.Helpers.GetPointFromIndex((GameDataManager.GameMap.Height / 2) * Hud.MapWidth + (GameDataManager.GameMap.Width / 2 -1), Hud.MapWidth);
-                GameDataManager.Stairs.Add(UpStairs);
+                UpStairs.Position = SadConsole.Helpers.GetPointFromIndex((GameLoop.GameDataManager.GameMap.Height / 2) * Hud.MapWidth + (GameLoop.GameDataManager.GameMap.Width / 2 -1), Hud.MapWidth);
+                GameLoop.GameDataManager.Stairs.Add(UpStairs);
                 Hud.MapConsole.Children.Add(UpStairs);
             }
         }
@@ -59,18 +60,18 @@ namespace Ascent
         // Create a player using SadConsole's Entity class
         private static void CreatePlayer()
         {
-            GameDataManager.Player = new Player(Color.Yellow, Color.Transparent);   
+            GameLoop.GameDataManager.Player = new Player(Color.Yellow, Color.Transparent);   
             // Place the player on the first non-movement-blocking tile on the map
-            for (int i = 0; i < GameDataManager.GameMap.Tiles.Length; i++)
+            for (int i = 0; i < GameLoop.GameDataManager.GameMap.Tiles.Length; i++)
             {
-                if (!GameDataManager.GameMap.Tiles[i].IsBlockingMove)
+                if (!GameLoop.GameDataManager.GameMap.Tiles[i].IsBlockingMove)
                 {
                     // Set the player's position to the index of the current map position
-                    GameDataManager.Player.Position = SadConsole.Helpers.GetPointFromIndex(i, Hud.MapWidth);
+                    GameLoop.GameDataManager.Player.Position = SadConsole.Helpers.GetPointFromIndex(i, Hud.MapWidth);
                     break;
                 }
             }
-            Hud.MapConsole.Children.Add(GameDataManager.Player);
+            Hud.MapConsole.Children.Add(GameLoop.GameDataManager.Player);
         }
 
         // Carve out a rectangular floor using the TileFloors class
@@ -83,7 +84,7 @@ namespace Ascent
                 {
                     // Calculates the appropriate position (index) in the array
                     // based on the y of tile, width of map, and x of tile
-                    GameDataManager.GameMap.Tiles[y * Hud.MapWidth + x] = new FloorTile();
+                    GameLoop.GameDataManager.GameMap.Tiles[y * Hud.MapWidth + x] = new FloorTile();
                 }
             }
             
@@ -93,12 +94,12 @@ namespace Ascent
         private static void CreateWalls()
         {
             // Create an empty array of tiles that is equal to the map size
-            GameDataManager.GameMap.Tiles = new BaseTile[Hud.MapWidth * Hud.MapHeight];
+            GameLoop.GameDataManager.GameMap.Tiles = new BaseTile[Hud.MapWidth * Hud.MapHeight];
 
             //Fill the entire tile array with walls
-            for (int i = 0; i < GameDataManager.GameMap.Tiles.Length; i++)
+            for (int i = 0; i < GameLoop.GameDataManager.GameMap.Tiles.Length; i++)
             {
-                GameDataManager.GameMap.Tiles[i] = new WallTile();
+                GameLoop.GameDataManager.GameMap.Tiles[i] = new WallTile();
             }
         }
 
@@ -109,9 +110,9 @@ namespace Ascent
             {
                 for (int j = 4; j < 9; j++)
                 {
-                    GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new WallTile();
+                    GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new WallTile();
                     if (i == 14 && j == 6)
-                        GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new FloorTile();
+                        GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new FloorTile();
                 }
             }
 
@@ -120,9 +121,9 @@ namespace Ascent
             {
                 for (int j = 12; j < 17; j++)
                 {
-                    GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new WallTile();
+                    GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new WallTile();
                     if (i == 14 && j == 14)
-                        GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new FloorTile();
+                        GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new FloorTile();
                 }
             }
 
@@ -131,9 +132,9 @@ namespace Ascent
             {
                 for (int j = 4; j < 9; j++)
                 {
-                    GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new WallTile();
+                    GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new WallTile();
                     if (i == 45 && j == 6)
-                        GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new FloorTile();
+                        GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new FloorTile();
                 }
             }
 
@@ -142,9 +143,9 @@ namespace Ascent
             {
                 for (int j = 12; j < 17; j++)
                 {
-                    GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new WallTile();
+                    GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new WallTile();
                     if (i == 45 && j == 14)
-                        GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new FloorTile();
+                        GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new FloorTile();
                 }
             }
         }
@@ -154,7 +155,7 @@ namespace Ascent
         // random places.
         public static void CreateEnemies()
         {
-            GameDataManager.Enemies = new List<Enemy>();
+            GameLoop.GameDataManager.Enemies = new List<Enemy>();
             // number of monsters to create
             int numMonsters = 2;
 
@@ -166,24 +167,24 @@ namespace Ascent
             {
                 int enemyPosition = 0;
                 Enemy newEnemy = new Enemy(Color.Blue, Color.Transparent);
-                while (GameDataManager.GameMap.Tiles[enemyPosition].IsBlockingMove)
+                while (GameLoop.GameDataManager.GameMap.Tiles[enemyPosition].IsBlockingMove)
                 {
                     // pick a random spot on the map
-                    enemyPosition = GameDataManager.rng.Next(0, Hud.MapWidth * Hud.MapHeight);
+                    enemyPosition = GameLoop.GameDataManager.rng.Next(0, Hud.MapWidth * Hud.MapHeight);
                 }
 
                 // plug in some magic numbers for attack and defense values
-                newEnemy.Defense = GameDataManager.rng.Next(0, 10);
-                newEnemy.DefenseChance = GameDataManager.rng.Next(0, 50);
-                newEnemy.Attack = GameDataManager.rng.Next(0, 10);
-                newEnemy.AttackChance = GameDataManager.rng.Next(0, 50);
+                newEnemy.Defense = GameLoop.GameDataManager.rng.Next(0, 10);
+                newEnemy.DefenseChance = GameLoop.GameDataManager.rng.Next(0, 50);
+                newEnemy.Attack = GameLoop.GameDataManager.rng.Next(0, 10);
+                newEnemy.AttackChance = GameLoop.GameDataManager.rng.Next(0, 50);
                 newEnemy.Name = "a common troll";
 
                 // Set the monster's new position
                 // Note: this fancy math will be replaced by a new helper method
                 // in the next revision of SadConsole
                 newEnemy.Position = new Point(enemyPosition % Hud.MapWidth, enemyPosition / Hud.MapWidth);
-                GameDataManager.Enemies.Add(newEnemy);
+                GameLoop.GameDataManager.Enemies.Add(newEnemy);
                 Hud.MapConsole.Children.Add(newEnemy);
             }
         }
@@ -195,7 +196,7 @@ namespace Ascent
             if (location.X < 0 || location.Y < 0 || location.X >= Hud.MapWidth || location.Y >= Hud.MapHeight)
                 return false;
             // then return whether the tile is walkable
-            return !GameDataManager.GameMap.Tiles[location.Y * Hud.MapWidth + location.X].IsBlockingMove;
+            return !GameLoop.GameDataManager.GameMap.Tiles[location.Y * Hud.MapWidth + location.X].IsBlockingMove;
         }
     }
 }
