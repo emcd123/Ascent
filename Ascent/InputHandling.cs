@@ -44,6 +44,12 @@ namespace MyProject
             {
                 CommandManager.UseStairs.Execute(actor);
             }
+
+            // Keyboard movement for Player character: Right arrow
+            if (SadConsole.Global.KeyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftControl) && SadConsole.Global.KeyboardState.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.X))
+            {
+                LoadingSystem.SaveGameToFileJson();
+            }
         }
     }
 }
