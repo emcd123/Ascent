@@ -25,7 +25,6 @@ namespace MyProject
             string JsonSaveData;
             JsonSaveData = JsonConvert.SerializeObject(GameLoop.GameDataManager.Player);
             File.WriteAllText(FilePath, JsonSaveData);
-            var Player = JsonConvert.DeserializeObject<Player>(JsonSaveData);
         }
 
         public static void LoadGameFromJson()
