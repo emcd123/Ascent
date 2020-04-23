@@ -24,11 +24,27 @@ namespace Ascent.Tiles
         // representing the most basic form of of all Tiles used.
         // Every TileBase has a Foreground Colour, Background Colour, and Glyph
         // IsBlockingMove and IsBlockingLOS are optional parameters, set to false by default
-        public Tile(Color foreground, Color background, int glyph, bool blockingMove = false, bool blockingLOS = false, String name = "") : base(foreground, background, glyph)
+        public Tile(Color foreground, Color background, int glyph, String type) : base(foreground, background, glyph)
         {
-            IsBlockingMove = blockingMove;
-            IsBlockingLOS = blockingLOS;
-            Name = name;
+            if(type  == TileTypes.Floor)
+            {
+                IsBlockingMove = false;
+                IsBlockingLOS = false;
+                Name = type;
+            }
+            if(type == TileTypes.Wall)
+            {
+
+                IsBlockingMove = true;
+                IsBlockingLOS = true;
+                Name = type;
+            }
         }
+    }
+
+    public class TileTypes
+    {
+        public readonly static string Floor = "Floor";
+        public readonly static string Wall = "Wall";
     }
 }
