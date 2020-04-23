@@ -23,13 +23,17 @@ namespace MyProject
                 Formatting = Formatting.Indented,
             };
             string JsonSaveData;
-            JsonSaveData = JsonConvert.SerializeObject(GameLoop.GameDataManager.Player);
+            JsonSaveData = JsonConvert.SerializeObject(GameLoop.GameDataManager.Player, settings);
             File.WriteAllText(FilePath, JsonSaveData);
         }
 
         public static void LoadGameFromJson()
         {
-            throw new NotImplementedException();
+            // read file into a string and deserialize JSON to a type
+            var FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SaveFile.json");
+            Hud.MapConsole.Children.Remove(GameLoop.GameDataManager.Player);
+            GameLoop.GameDataManager.Player = JsonConvert.DeserializeObject<Player>(File.ReadAllText(FilePath));
+            Hud.MapConsole.Children.Add(GameLoop.GameDataManager.Player);
         }
 
         public static void NewGameOverWriteJson()

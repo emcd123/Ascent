@@ -1,5 +1,6 @@
 ﻿using Ascent.Entities;
 using Microsoft.Xna.Framework;
+using SadConsole.SerializedTypes;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Ascent.SerializedTypes
 {
-    public class ActorSerialised
+    public class ActorSerialised : EntitySerialized
     {
         private int _health; //current health
         private int _maxHealth; //maximum possible health
@@ -24,7 +25,6 @@ namespace Ascent.SerializedTypes
         {
             var serializedObject = new ActorSerialised()
             {
-                Health = actor.Health,
             };
 
             return serializedObject;
@@ -33,7 +33,6 @@ namespace Ascent.SerializedTypes
         public static implicit operator Actor(ActorSerialised serializedObject)
         {
             var actor = new Actor(Color.Yellow, Color.Transparent, '@');
-            actor.Health = serializedObject.Health;
             return actor;
         }
     }

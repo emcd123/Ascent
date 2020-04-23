@@ -20,18 +20,18 @@ namespace Ascent.SerializedTypes
     /// Serialized instance of a <see cref="Entity"/>.
     /// </summary>
     [DataContract]
-    public class PlayerSerialized/* : ActorSerialised*/
+    public class PlayerSerialized : ActorSerialised
     {
-        [DataMember] public int AttackPower;
-        [DataMember] public int Attack;
-        [DataMember] public int Defense;
         public static implicit operator PlayerSerialized(Player player)
         {
             var serializedObject = new PlayerSerialized()
             {
-                AttackPower = player.AttackPower,
                 Attack = player.Attack,
-                Defense = player.Defense
+                AttackChance = player.AttackChance,
+                Defense = player.Defense,
+                DefenseChance = player.DefenseChance,
+                Position = player.Position,
+                Name = player.Name,
             };
 
             return serializedObject;
@@ -40,9 +40,13 @@ namespace Ascent.SerializedTypes
         public static implicit operator Player(PlayerSerialized serializedObject)
         {
             var player = new Player(Color.Yellow, Color.Transparent);
-            player.AttackPower = serializedObject.AttackPower;
             player.Attack = serializedObject.Attack;
+            player.AttackChance = serializedObject.AttackChance;
             player.Defense = serializedObject.Defense;
+            player.DefenseChance = serializedObject.DefenseChance;
+            player.Name = serializedObject.Name;
+            player.Position = serializedObject.Position;
+
             return player;
         }
     }    
