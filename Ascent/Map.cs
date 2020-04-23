@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Ascent.Entities;
+using Ascent.Tiles;
 using Microsoft.Xna.Framework;
 using MyProject;
 using SadConsole.Entities;
@@ -11,11 +12,11 @@ namespace Ascent
     public class Map
     {
 
-        private BaseTile[] _tiles; // contain all tile objects
+        private Tile[] _tiles; // contain all tile objects
         private int _width;
         private int _height;
 
-        public BaseTile[] Tiles { get { return _tiles; } set { _tiles = value; } }
+        public Tile[] Tiles { get { return _tiles; } set { _tiles = value; } }
         public int Width { get { return _width; } set { _width = value; } }
         public int Height { get { return _height; } set { _height = value; } }
 
@@ -25,7 +26,7 @@ namespace Ascent
         {
             Width = width;
             Height = height;
-            Tiles = new BaseTile[width * height];
+            Tiles = new Tile[width * height];
         }
 
         public Stair GetStairAt(Point position)

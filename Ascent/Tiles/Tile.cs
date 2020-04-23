@@ -1,27 +1,30 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Ascent.SerializedTypes;
+using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 using SadConsole;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ascent
+namespace Ascent.Tiles
 {
     // TileBase is an abstract base class 
     // representing the most basic form of of all Tiles used.
-    public abstract class BaseTile : Cell
+    [JsonConverter(typeof(TileJsonConverter))]
+    public class Tile : Cell
     {
         // Movement and Line of Sight Flags
         public bool IsBlockingMove;
         public bool IsBlockingLOS;
 
         // Tile's name
-        protected string Name;
+        public string Name;
 
         // TileBase is an abstract base class 
         // representing the most basic form of of all Tiles used.
         // Every TileBase has a Foreground Colour, Background Colour, and Glyph
         // IsBlockingMove and IsBlockingLOS are optional parameters, set to false by default
-        public BaseTile(Color foreground, Color background, int glyph, bool blockingMove = false, bool blockingLOS = false, String name = "") : base(foreground, background, glyph)
+        public Tile(Color foreground, Color background, int glyph, bool blockingMove = false, bool blockingLOS = false, String name = "") : base(foreground, background, glyph)
         {
             IsBlockingMove = blockingMove;
             IsBlockingLOS = blockingLOS;

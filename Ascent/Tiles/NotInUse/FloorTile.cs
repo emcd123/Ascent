@@ -1,10 +1,13 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Ascent.SerializedTypes;
+using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Ascent
 {
+    [JsonConverter(typeof(FloorTileJsonConverter))]
     public class FloorTile : BaseTile
     {
         // Default constructor

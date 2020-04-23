@@ -1,4 +1,5 @@
 ﻿using Ascent.Entities;
+using Ascent.Tiles;
 using Microsoft.Xna.Framework;
 using MyProject;
 using SadConsole;
@@ -84,7 +85,7 @@ namespace Ascent
                 {
                     // Calculates the appropriate position (index) in the array
                     // based on the y of tile, width of map, and x of tile
-                    GameLoop.GameDataManager.GameMap.Tiles[y * Hud.MapWidth + x] = new FloorTile();
+                    GameLoop.GameDataManager.GameMap.Tiles[y * Hud.MapWidth + x] = new Tile(Color.DarkGray, Color.Transparent, '.', false, false, "Floor");
                 }
             }
             
@@ -94,12 +95,12 @@ namespace Ascent
         private static void CreateWalls()
         {
             // Create an empty array of tiles that is equal to the map size
-            GameLoop.GameDataManager.GameMap.Tiles = new BaseTile[Hud.MapWidth * Hud.MapHeight];
+            GameLoop.GameDataManager.GameMap.Tiles = new Tile[Hud.MapWidth * Hud.MapHeight];
 
             //Fill the entire tile array with walls
             for (int i = 0; i < GameLoop.GameDataManager.GameMap.Tiles.Length; i++)
             {
-                GameLoop.GameDataManager.GameMap.Tiles[i] = new WallTile();
+                GameLoop.GameDataManager.GameMap.Tiles[i] = new Tile(Color.DarkGray, Color.Transparent, '#', true, true, "Wall");
             }
         }
 
@@ -110,9 +111,9 @@ namespace Ascent
             {
                 for (int j = 4; j < 9; j++)
                 {
-                    GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new WallTile();
+                    GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new Tile(Color.DarkGray, Color.Transparent, '#', true, true, "Wall");
                     if (i == 14 && j == 6)
-                        GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new FloorTile();
+                        GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new Tile(Color.DarkGray, Color.Transparent, '.', false, false, "Floor");
                 }
             }
 
@@ -121,9 +122,9 @@ namespace Ascent
             {
                 for (int j = 12; j < 17; j++)
                 {
-                    GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new WallTile();
+                    GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new Tile(Color.DarkGray, Color.Transparent, '#', true, true, "Wall");
                     if (i == 14 && j == 14)
-                        GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new FloorTile();
+                        GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new Tile(Color.DarkGray, Color.Transparent, '.', false, false, "Floor");
                 }
             }
 
@@ -132,9 +133,9 @@ namespace Ascent
             {
                 for (int j = 4; j < 9; j++)
                 {
-                    GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new WallTile();
+                    GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new Tile(Color.DarkGray, Color.Transparent, '#', true, true, "Wall");
                     if (i == 45 && j == 6)
-                        GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new FloorTile();
+                        GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new Tile(Color.DarkGray, Color.Transparent, '.', false, false, "Floor");
                 }
             }
 
@@ -143,9 +144,9 @@ namespace Ascent
             {
                 for (int j = 12; j < 17; j++)
                 {
-                    GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new WallTile();
+                    GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new Tile(Color.DarkGray, Color.Transparent, '#', true, true, "Wall");
                     if (i == 45 && j == 14)
-                        GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new FloorTile();
+                        GameLoop.GameDataManager.GameMap.Tiles[j * Hud.MapWidth + i] = new Tile(Color.DarkGray, Color.Transparent, '.', false, false, "Floor");
                 }
             }
         }

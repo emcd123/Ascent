@@ -10,6 +10,7 @@ using System.Dynamic;
 using System.Linq;
 using Ascent.Entities;
 using SadConsole.Entities;
+using Ascent.Tiles;
 
 namespace MyProject
 {
@@ -23,7 +24,7 @@ namespace MyProject
                 Formatting = Formatting.Indented,
             };
             string JsonSaveData;
-            JsonSaveData = JsonConvert.SerializeObject(GameLoop.GameDataManager.Player, settings);
+            JsonSaveData = JsonConvert.SerializeObject(GameLoop.GameDataManager, settings);
             File.WriteAllText(FilePath, JsonSaveData);
         }
 
@@ -31,9 +32,9 @@ namespace MyProject
         {
             // read file into a string and deserialize JSON to a type
             var FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SaveFile.json");
-            Hud.MapConsole.Children.Remove(GameLoop.GameDataManager.Player);
-            GameLoop.GameDataManager.Player = JsonConvert.DeserializeObject<Player>(File.ReadAllText(FilePath));
-            Hud.MapConsole.Children.Add(GameLoop.GameDataManager.Player);
+            //Hud.MapConsole.Children.Remove(GameLoop.GameDataManager.Player);
+            GameLoop.GameDataManager = JsonConvert.DeserializeObject<GameDataManager>(File.ReadAllText(FilePath));
+            //Hud.MapConsole.Children.Add(GameLoop.GameDataManager.Player);
         }
 
         public static void NewGameOverWriteJson()
