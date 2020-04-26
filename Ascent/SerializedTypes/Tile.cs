@@ -36,6 +36,7 @@ namespace Ascent.SerializedTypes
                 Name = baseTile.Name,
                 Foreground = baseTile.Foreground,
                 Background = baseTile.Background,
+                Glyph = baseTile.Glyph,
             };
 
             return serializedObject;
@@ -43,7 +44,7 @@ namespace Ascent.SerializedTypes
 
         public static implicit operator Tile(TileSerialized serializedObject)
         {
-            var baseTile = new Tile(Color.DarkGray, Color.Transparent, '.', false, false);
+            var baseTile = new Tile(Color.DarkGray, Color.Transparent, '.', "");
 
             baseTile.IsBlockingLOS = serializedObject.IsBlockingLOS;
             baseTile.IsBlockingMove = serializedObject.IsBlockingMove;

@@ -12,7 +12,6 @@ namespace Ascent.Entities
     [JsonConverter(typeof(PlayerJsonConverter))]
     public class Player : Actor
     {
-        public int AttackPower;
         public Player(Color foreground, Color background) : base(foreground, background, '@')
         {
             Attack = 10;
@@ -20,7 +19,6 @@ namespace Ascent.Entities
             Defense = 5;
             DefenseChance = 20;
             Name = "Rogue";
-            AttackPower = 50;
         }
     }
 }

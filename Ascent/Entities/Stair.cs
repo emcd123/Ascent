@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Ascent.SerializedTypes;
+using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 using SadConsole.Entities;
 using System;
 using System.Collections.Generic;
@@ -6,6 +8,7 @@ using System.Text;
 
 namespace Ascent.Entities
 {
+    [JsonConverter(typeof(StairJsonConverter))]
     public class Stair : Entity
     {
         private bool _downStair;

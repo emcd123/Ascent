@@ -175,10 +175,10 @@ namespace Ascent
                 }
 
                 // plug in some magic numbers for attack and defense values
-                newEnemy.Defense = GameLoop.GameDataManager.rng.Next(0, 10);
-                newEnemy.DefenseChance = GameLoop.GameDataManager.rng.Next(0, 50);
-                newEnemy.Attack = GameLoop.GameDataManager.rng.Next(0, 10);
-                newEnemy.AttackChance = GameLoop.GameDataManager.rng.Next(0, 50);
+                newEnemy.Defense = GameLoop.GameDataManager.rng.Next(1, 10);
+                newEnemy.DefenseChance = GameLoop.GameDataManager.rng.Next(1, 50);
+                newEnemy.Attack = GameLoop.GameDataManager.rng.Next(1, 10);
+                newEnemy.AttackChance = GameLoop.GameDataManager.rng.Next(1, 50);
                 newEnemy.Name = "a common troll";
 
                 // Set the monster's new position
