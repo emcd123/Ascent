@@ -32,9 +32,26 @@ namespace MyProject
         {
             // read file into a string and deserialize JSON to a type
             var FilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SaveFile.json");
-            //Hud.MapConsole.Children.Remove(GameLoop.GameDataManager.Player);
+            Hud.MapConsole.Children.Clear();            
             GameLoop.GameDataManager = JsonConvert.DeserializeObject<GameDataManager>(File.ReadAllText(FilePath));
-            //Hud.MapConsole.Children.Add(GameLoop.GameDataManager.Player);
+            RefreshConsolesAfterLoading();
+        }
+
+        private static void RefreshConsolesAfterLoading()
+        {
+            MapGenerator.LoadMap();
+            Hud.MapConsole.Children.Add(GameLoop.GameDataManager.Player);
+            for (int i = 0; i < GameLoop.GameDataManager.Stairs.Count; i++)
+            {
+                Hud.MapConsole.Children.Add(GameLoop.GameDataManager.Stairs[i]);
+            }
+            if (GameLoop.GameDataManager.Enemies != null)
+            {
+                for (int i = 0; i < GameLoop.GameDataManager.Enemies.Count; i++)
+                {
+                    Hud.MapConsole.Children.Add(GameLoop.GameDataManager.Enemies[i]);
+                }
+            }
         }
 
         public static void NewGameOverWriteJson()

@@ -43,7 +43,7 @@ namespace Ascent
         private static void PlaceStairs(bool notTown = false)
         {
             GameLoop.GameDataManager.Stairs = new List<Stair>() { };
-            Stair Downstairs = new Stair(Color.White, Color.Black, "Down Stairs", true, '>');
+            Stair Downstairs = new Stair(Color.White, Color.Transparent, "Down Stairs", true, '>');
             Downstairs.Position = SadConsole.Helpers.GetPointFromIndex((GameLoop.GameDataManager.GameMap.Height / 2) * Hud.MapWidth + (GameLoop.GameDataManager.GameMap.Width / 2), Hud.MapWidth);
             GameLoop.GameDataManager.Stairs.Add(Downstairs);
             Hud.MapConsole.Children.Add(Downstairs);
@@ -51,7 +51,7 @@ namespace Ascent
             // **TEST this is just to guarantee an upstairs on the non-town level
             if (notTown)
             {
-                Stair UpStairs = new Stair(Color.White, Color.Black, "Up Stairs", false, '<');
+                Stair UpStairs = new Stair(Color.White, Color.Transparent, "Up Stairs", false, '<');
                 UpStairs.Position = SadConsole.Helpers.GetPointFromIndex((GameLoop.GameDataManager.GameMap.Height / 2) * Hud.MapWidth + (GameLoop.GameDataManager.GameMap.Width / 2 -1), Hud.MapWidth);
                 GameLoop.GameDataManager.Stairs.Add(UpStairs);
                 Hud.MapConsole.Children.Add(UpStairs);

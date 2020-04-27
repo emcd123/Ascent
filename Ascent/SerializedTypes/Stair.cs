@@ -31,15 +31,18 @@ namespace Ascent.SerializedTypes
             {
                 Name = stair.Name,
                 DownStair = stair.DownStair,
-                Position = stair.Position,
+                Position = stair.Position,                  
             };
-
             return serializedObject;
         }
 
         public static implicit operator Stair(StairSerialized serializedObject)
         {
-            var stair = new Stair(Color.White, Color.Black, "Down Stairs", true, '>');
+            Stair stair;
+            if(serializedObject.DownStair)
+                stair = new Stair(Color.White, Color.Transparent, "Down Stairs", true, '>');
+            else
+                stair = new Stair(Color.White, Color.Transparent, "Up Stairs", false, '<');
             stair.Name = serializedObject.Name;
             stair.DownStair = serializedObject.DownStair;
             stair.Position = serializedObject.Position;
